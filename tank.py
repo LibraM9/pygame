@@ -8,8 +8,9 @@
 import pygame, sys, time
 from random import randint
 from pygame.locals import *
+import os
 
-
+path = os.getcwd()
 class TankMain():
     # 开始游戏
     width = 600
@@ -28,7 +29,7 @@ class TankMain():
         pygame.init()  # pygame
         # 创建一个屏幕，屏幕的大小，宽和高，0为固定大小（0，RESIZEBLE,FULLSCREEN
         screem = pygame.display.set_mode((TankMain.width, TankMain.height), 0, 32)
-        pygame.display.set_caption("管萍大战")
+        pygame.display.set_caption("坦克大战")
 
         TankMain.wall = Wall(screem, 60, 75, 30, 120)  # 创建一个墙
 
@@ -43,9 +44,10 @@ class TankMain():
                 pygame.time.wait(1000)
                 TankMain.my_tank = My_Tank(screem)
             if len(TankMain.enemy_list) == 0:
-                m_p = pygame.image.load("F:/迅雷下载/img/next.jpg").convert_alpha()
+                m_p = pygame.image.load(path+"/img/next.jpg").convert_alpha()
                 screem.blit(m_p, (0,0))
                 pygame.display.update()
+
             # color RGB（0,100,200）
             # 设置屏幕背景色为黑色
             screem.fill((0, 0, 0))
@@ -163,10 +165,10 @@ class Tank(BaseItem):
         self.speed = 5  # 坦克移动速度
         self.stop = False
         self.images = {}  # 坦克的所有图片，key 方向 value 图片（suface)
-        self.images["L"] = pygame.image.load("F:/迅雷下载/img/lm.png")
-        self.images["R"] = pygame.image.load("F:/迅雷下载/img/lm.png")
-        self.images["U"] = pygame.image.load("F:/迅雷下载/img/lm.png")
-        self.images["D"] = pygame.image.load("F:/迅雷下载/img/lm.png")
+        self.images["L"] = pygame.image.load(path+"/img/foetank.png")
+        self.images["R"] = pygame.image.load(path+"/img/foetank.png")
+        self.images["U"] = pygame.image.load(path+"/img/foetank.png")
+        self.images["D"] = pygame.image.load(path+"/img/foetank.png")
         self.image = self.images[self.direction]  # 坦克的图片由方向决定
         self.rect = self.image.get_rect()
         self.rect.left = left
@@ -233,10 +235,10 @@ class Enemy_Tank(Tank):
         self.step = 8  # 坦克在一个方向移动6步
 
         self.get_random_direction()
-        self.images["L"] = pygame.image.load("F:/迅雷下载/img/gp.png")
-        self.images["R"] = pygame.image.load("F:/迅雷下载/img/gp.png")
-        self.images["U"] = pygame.image.load("F:/迅雷下载/img/gp.png")
-        self.images["D"] = pygame.image.load("F:/迅雷下载/img/gp.png")
+        self.images["L"] = pygame.image.load(path+"/img/dboss.png")
+        self.images["R"] = pygame.image.load(path+"/img/dboss.png")
+        self.images["U"] = pygame.image.load(path+"/img/dboss.png")
+        self.images["D"] = pygame.image.load(path+"/img/dboss.png")
 
     def get_random_direction(self):
         r = randint(0, 4)  # 得到一个坦克移动方向和停止的随机数
@@ -284,10 +286,10 @@ class Missile(BaseItem):
         self.direction = tank.direction  # 炮弹的方向由所发射的坦克决定
         self.speed = 12  # 炮弹移动速度
         self.images = {}  # 炮弹的所有图片，key 方向 value 图片（suface)
-        self.images["L"] = pygame.image.load("F:/迅雷下载/img/shell.png")
-        self.images["R"] = pygame.image.load("F:/迅雷下载/img/shell.png")
-        self.images["U"] = pygame.image.load("F:/迅雷下载/img/shell.png")
-        self.images["D"] = pygame.image.load("F:/迅雷下载/img/shell.png")
+        self.images["L"] = pygame.image.load(path+"/img/shell.png")
+        self.images["R"] = pygame.image.load(path+"/img/shell.png")
+        self.images["U"] = pygame.image.load(path+"/img/shell.png")
+        self.images["D"] = pygame.image.load(path+"/img/shell.png")
         self.image = self.images[self.direction]  # 坦克的图片由方向决定
         self.rect = self.image.get_rect()
         self.rect.left = tank.rect.left + (tank.width - self.width) / 2
@@ -336,17 +338,17 @@ class Explode(BaseItem):
     def __init__(self, screem, rect):
         super(Explode, self).__init__(screem)
         self.live = True
-        self.images = [pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), \
-                       pygame.image.load("F:/迅雷下载/img/gp2.png"), ]  # 爆炸效果的图片
+        self.images = [pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), \
+                       pygame.image.load(path+"/img/bossfire.png"), ]  # 爆炸效果的图片
         self.step = 0
         self.rect = rect  # 爆炸的位置和炮弹碰到的坦克位置一样
 
